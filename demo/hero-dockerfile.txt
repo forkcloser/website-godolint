@@ -1,0 +1,6 @@
+FROM node:latest
+RUN apt-get install -y curl
+ADD ./src /srv/app
+WORKDIR app
+RUN curl -sSL https://get.example.com | sh
+CMD npm start

@@ -1,0 +1,3 @@
+# The Pages hostname exists so the deployment has an address before DNS does.
+# Once the real hostname is live, the pages.dev one sends everyone there.
+https://website-godolint.pages.dev/* https://godolint.farcloser.world/:splat 301

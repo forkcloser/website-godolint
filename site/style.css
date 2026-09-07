@@ -1,0 +1,139 @@
+/* godolint — what is particular to this site, on top of farcloser.css:
+ * the severity colours, the hero layout, and the annotated Dockerfile. */
+
+:root {
+  --error: #a93a2e;
+  --warning: #8a660a;
+  --info: #35597a;
+  --style: #626a72;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --error: #e6786b;
+    --warning: #ddb64b;
+    --info: #8fb4d6;
+    --style: #8c949c;
+  }
+}
+:root[data-theme="dark"] {
+  --error: #e6786b;
+  --warning: #ddb64b;
+  --info: #8fb4d6;
+  --style: #8c949c;
+}
+
+.sev-error { --sev: var(--error); --dot: var(--error); }
+.sev-warning { --sev: var(--warning); --dot: var(--warning); }
+.sev-info { --sev: var(--info); --dot: var(--info); }
+.sev-style { --sev: var(--style); --dot: var(--style); }
+.sev-ignore { --sev: var(--ink-3); --dot: var(--ink-3); }
+
+/* Hero: copy on the left, the annotated file on the right. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: var(--s-12);
+  align-items: start;
+  padding: var(--s-12) 0 var(--s-16);
+}
+.hero h1 { margin-bottom: var(--s-6); }
+
+/* The annotated Dockerfile. Source lines in mono with a gutter; findings
+ * beneath each line in the text face, keyed by a severity rule on the left. */
+.lint {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: var(--text-sm);
+}
+.lint figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-2) var(--s-4);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+}
+.lint figcaption span:last-child { color: var(--ink-3); }
+.src { list-style: none; margin: 0; padding: var(--s-2) 0; counter-reset: line; }
+.src > li { counter-increment: line; max-width: none; }
+.src > li > code {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: var(--s-2);
+  padding: var(--s-1) var(--s-4) var(--s-1) 0;
+  white-space: pre;
+  overflow-x: auto;
+  background: none;
+  border-radius: 0;
+  font-size: inherit;
+}
+.src > li > code::before {
+  content: counter(line);
+  text-align: right;
+  color: var(--ink-3);
+}
+.diag {
+  list-style: none;
+  margin: var(--s-1) var(--s-4) var(--s-2) 3rem;
+  padding: 0;
+  display: grid;
+  gap: var(--s-1);
+}
+.diag li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-3);
+  align-items: baseline;
+  padding: var(--s-2) var(--s-3);
+  border-left: 2px solid var(--sev);
+  background: color-mix(in srgb, var(--sev) 7%, var(--bg));
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: var(--sans);
+  font-size: var(--text-xs);
+  line-height: 1.45;
+  color: var(--ink-2);
+  max-width: none;
+}
+.diag > li > span { min-width: 0; }
+.diag b { font-family: var(--mono); font-weight: 600; color: var(--sev); white-space: nowrap; }
+.diag b small { font-family: var(--sans); font-weight: 500; font-size: 0.85em; margin-left: var(--s-2); color: var(--ink-3); }
+.lint .foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-2) var(--s-4);
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+}
+
+details.raw pre { font-size: var(--text-xs); }
+
+/* Rules tables: the code column in mono, the severity column carries its dot. */
+.rules td:first-child { font-family: var(--mono); white-space: nowrap; }
+.rules td:first-child a { color: var(--ink); text-decoration: none; }
+.rules td:first-child a:hover { color: var(--link); }
+.rules td:nth-child(2) { white-space: nowrap; color: var(--sev); }
+.rules td:nth-child(2)::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--sev);
+  margin-right: var(--s-2);
+  vertical-align: 0.05em;
+}
+.rules-more { margin-top: var(--s-4); }
+
+@media (max-width: 820px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: var(--s-8); padding-top: var(--s-8); }
+  .diag { margin-left: var(--s-4); }
+}

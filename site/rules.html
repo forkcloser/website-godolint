@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rules — godolint</title>
+  <meta name="description" content="Every rule godolint ships: the same codes, severities and messages as hadolint.">
+  <link rel="canonical" href="https://godolint.farcloser.world/rules.html">
+  <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1a1f24" media="(prefers-color-scheme: dark)">
+  <script>try{var t=localStorage.getItem("farcloser-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="stylesheet" href="farcloser.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:url" content="https://godolint.farcloser.world/rules.html">
+  <meta property="og:title" content="Rules — godolint">
+  <meta property="og:description" content="Every rule godolint ships: the same codes, severities and messages as hadolint.">
+  <meta property="og:image" content="https://godolint.farcloser.world/logo.png">
+  <script src="farcloser.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap top">
+  <a class="brand" href="./">
+    <svg class="mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M2 14h20"/>
+      <path d="M7 14V5"/>
+      <path class="road" d="M9 19h6"/>
+    </svg>
+    <span class="org">farcloser</span><span class="sep">/</span>godolint
+  </a>
+  <nav class="nav" aria-label="Site">
+    <a href="rules.html" aria-current="page">Rules</a>
+    <a href="https://pkg.go.dev/github.com/farcloser/godolint/sdk">SDK reference</a>
+    <a href="https://github.com/farcloser/godolint">GitHub</a>
+    <button class="theme" type="button" aria-label="Theme: system. Switch to light.">
+      <svg class="auto" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main id="main">
+<section class="plain">
+  <div class="wrap">
+    <h2>Rules</h2>
+    <p class="intro">The rules godolint implements, with the code, severity and message each reports. All of them come from hadolint; <a href="https://github.com/hadolint/hadolint/wiki">hadolint's wiki</a> documents each code in detail.</p>
+    <p>Two rules are off by default, as in hadolint: DL1001 objects to inline ignore pragmas, and DL3057 asks for a <code>HEALTHCHECK</code>. Enable them explicitly if needed. <code>RuleSetRecommended</code> keeps only the error and warning rows below. Messages shown as <code>Label &lt;label&gt;</code> name the offending label when reported.</p>
+    <ul class="tally" aria-label="Rules by severity">
+      <li class="sev-error"><strong>14</strong> error</li>
+      <li class="sev-warning"><strong>38</strong> warning</li>
+      <li class="sev-info"><strong>10</strong> info</li>
+      <li class="sev-style"><strong>1</strong> style</li>
+      <li class="sev-ignore"><strong>2</strong> off by default</li>
+    </ul>
+    <div class="table-scroll">
+      <table class="rules">
+        <thead><tr><th>Code</th><th>Severity</th><th>Message</th></tr></thead>
+        <tbody>
+          <tr id="DL1001" class="sev-ignore"><td><a href="#DL1001">DL1001</a></td><td>off by default</td><td>Please refrain from using inline ignore pragmas <code># hadolint ignore=DLxxxx</code>.</td></tr>
+          <tr id="DL3000" class="sev-error"><td><a href="#DL3000">DL3000</a></td><td>error</td><td>Use absolute WORKDIR</td></tr>
+          <tr id="DL3001" class="sev-info"><td><a href="#DL3001">DL3001</a></td><td>info</td><td>For some bash commands it makes no sense running them in a Docker container like <code>ssh</code>, <code>vim</code>, <code>shutdown</code>, <code>service</code>, <code>ps</code>, <code>free</code>, <code>top</code>, <code>kill</code>, <code>mount</code>, <code>ifconfig</code></td></tr>
+          <tr id="DL3002" class="sev-warning"><td><a href="#DL3002">DL3002</a></td><td>warning</td><td>Last USER should not be root</td></tr>
+          <tr id="DL3003" class="sev-warning"><td><a href="#DL3003">DL3003</a></td><td>warning</td><td>Use WORKDIR to switch to a directory</td></tr>
+          <tr id="DL3004" class="sev-error"><td><a href="#DL3004">DL3004</a></td><td>error</td><td>Do not use sudo as it leads to unpredictable behavior. Use a tool like gosu to enforce root</td></tr>
+          <tr id="DL3006" class="sev-warning"><td><a href="#DL3006">DL3006</a></td><td>warning</td><td>Always tag the version of an image explicitly</td></tr>
+          <tr id="DL3007" class="sev-warning"><td><a href="#DL3007">DL3007</a></td><td>warning</td><td>Using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag</td></tr>
+          <tr id="DL3008" class="sev-warning"><td><a href="#DL3008">DL3008</a></td><td>warning</td><td>Pin versions in apt get install. Instead of <code>apt-get install &lt;package&gt;</code> use <code>apt-get install &lt;package&gt;=&lt;version&gt;</code></td></tr>
+          <tr id="DL3009" class="sev-info"><td><a href="#DL3009">DL3009</a></td><td>info</td><td>Delete the apt lists (/var/lib/apt/lists) after installing something</td></tr>
+          <tr id="DL3010" class="sev-info"><td><a href="#DL3010">DL3010</a></td><td>info</td><td>Use <code>ADD</code> for extracting archives into an image</td></tr>
+          <tr id="DL3011" class="sev-error"><td><a href="#DL3011">DL3011</a></td><td>error</td><td>Valid UNIX ports range from 0 to 65535</td></tr>
+          <tr id="DL3012" class="sev-error"><td><a href="#DL3012">DL3012</a></td><td>error</td><td>Multiple <code>HEALTHCHECK</code> instructions</td></tr>
+          <tr id="DL3013" class="sev-warning"><td><a href="#DL3013">DL3013</a></td><td>warning</td><td>Pin versions in pip. Instead of <code>pip install &lt;package&gt;</code> use <code>pip install &lt;package&gt;==&lt;version&gt;</code> or <code>pip install --requirement &lt;requirements file&gt;</code></td></tr>
+          <tr id="DL3014" class="sev-warning"><td><a href="#DL3014">DL3014</a></td><td>warning</td><td>Use the <code>-y</code> switch to avoid manual input <code>apt-get -y install &lt;package&gt;</code></td></tr>
+          <tr id="DL3015" class="sev-info"><td><a href="#DL3015">DL3015</a></td><td>info</td><td>Avoid additional packages by specifying <code>--no-install-recommends</code></td></tr>
+          <tr id="DL3016" class="sev-warning"><td><a href="#DL3016">DL3016</a></td><td>warning</td><td>Pin versions in npm. Instead of <code>npm install &lt;package&gt;</code> use <code>npm install &lt;package&gt;@&lt;version&gt;</code></td></tr>
+          <tr id="DL3018" class="sev-warning"><td><a href="#DL3018">DL3018</a></td><td>warning</td><td>Pin versions in apk add. Instead of <code>apk add &lt;package&gt;</code> use <code>apk add &lt;package&gt;=&lt;version&gt;</code></td></tr>
+          <tr id="DL3019" class="sev-info"><td><a href="#DL3019">DL3019</a></td><td>info</td><td>Use the <code>--no-cache</code> switch to avoid the need to use <code>--update</code> and remove <code>/var/cache/apk/*</code> when done installing packages</td></tr>
+          <tr id="DL3020" class="sev-error"><td><a href="#DL3020">DL3020</a></td><td>error</td><td>Use COPY instead of ADD for files and folders</td></tr>
+          <tr id="DL3021" class="sev-error"><td><a href="#DL3021">DL3021</a></td><td>error</td><td>COPY with more than 2 arguments requires the last argument to end with /</td></tr>
+          <tr id="DL3022" class="sev-warning"><td><a href="#DL3022">DL3022</a></td><td>warning</td><td><code>COPY --from</code> should reference a previously defined <code>FROM</code> alias</td></tr>
+          <tr id="DL3023" class="sev-error"><td><a href="#DL3023">DL3023</a></td><td>error</td><td><code>COPY --from</code> cannot reference its own <code>FROM</code> alias</td></tr>
+          <tr id="DL3024" class="sev-error"><td><a href="#DL3024">DL3024</a></td><td>error</td><td>FROM aliases (stage names) must be unique</td></tr>
+          <tr id="DL3025" class="sev-warning"><td><a href="#DL3025">DL3025</a></td><td>warning</td><td>Use arguments JSON notation for CMD and ENTRYPOINT arguments</td></tr>
+          <tr id="DL3026" class="sev-error"><td><a href="#DL3026">DL3026</a></td><td>error</td><td>Use only an allowed registry in the FROM image</td></tr>
+          <tr id="DL3027" class="sev-warning"><td><a href="#DL3027">DL3027</a></td><td>warning</td><td>Do not use apt as it is meant to be an end-user tool, use apt-get or apt-cache instead</td></tr>
+          <tr id="DL3028" class="sev-warning"><td><a href="#DL3028">DL3028</a></td><td>warning</td><td>Pin versions in gem install. Instead of <code>gem install &lt;gem&gt;</code> use <code>gem install &lt;gem&gt;:&lt;version&gt;</code></td></tr>
+          <tr id="DL3029" class="sev-warning"><td><a href="#DL3029">DL3029</a></td><td>warning</td><td>Do not use --platform flag with FROM</td></tr>
+          <tr id="DL3030" class="sev-warning"><td><a href="#DL3030">DL3030</a></td><td>warning</td><td>Use the -y switch to avoid manual input <code>yum install -y &lt;package&gt;</code></td></tr>
+          <tr id="DL3032" class="sev-warning"><td><a href="#DL3032">DL3032</a></td><td>warning</td><td><code>yum clean all</code> missing after yum command.</td></tr>
+          <tr id="DL3033" class="sev-warning"><td><a href="#DL3033">DL3033</a></td><td>warning</td><td>Specify version with <code>yum install -y &lt;package&gt;-&lt;version&gt;</code>.</td></tr>
+          <tr id="DL3034" class="sev-warning"><td><a href="#DL3034">DL3034</a></td><td>warning</td><td>Non-interactive switch missing from <code>zypper</code> command: <code>zypper install -y</code></td></tr>
+          <tr id="DL3035" class="sev-warning"><td><a href="#DL3035">DL3035</a></td><td>warning</td><td>Do not use <code>zypper dist-upgrade</code>.</td></tr>
+          <tr id="DL3036" class="sev-warning"><td><a href="#DL3036">DL3036</a></td><td>warning</td><td><code>zypper clean</code> missing after zypper use.</td></tr>
+          <tr id="DL3037" class="sev-warning"><td><a href="#DL3037">DL3037</a></td><td>warning</td><td>Specify version with <code>zypper install -y &lt;package&gt;=&lt;version&gt;</code>.</td></tr>
+          <tr id="DL3038" class="sev-warning"><td><a href="#DL3038">DL3038</a></td><td>warning</td><td>Use the -y switch to avoid manual input <code>dnf install -y &lt;package&gt;</code></td></tr>
+          <tr id="DL3040" class="sev-warning"><td><a href="#DL3040">DL3040</a></td><td>warning</td><td><code>dnf clean all</code> missing after dnf command.</td></tr>
+          <tr id="DL3041" class="sev-warning"><td><a href="#DL3041">DL3041</a></td><td>warning</td><td>Specify version with <code>dnf install -y &lt;package&gt;-&lt;version&gt;</code>.</td></tr>
+          <tr id="DL3042" class="sev-warning"><td><a href="#DL3042">DL3042</a></td><td>warning</td><td>Avoid use of cache directory with pip. Use <code>pip install --no-cache-dir &lt;package&gt;</code></td></tr>
+          <tr id="DL3043" class="sev-error"><td><a href="#DL3043">DL3043</a></td><td>error</td><td><code>ONBUILD</code>, <code>FROM</code> or <code>MAINTAINER</code> triggered from within <code>ONBUILD</code> instruction.</td></tr>
+          <tr id="DL3044" class="sev-error"><td><a href="#DL3044">DL3044</a></td><td>error</td><td>Do not refer to an environment variable within the same <code>ENV</code> statement where it is defined.</td></tr>
+          <tr id="DL3045" class="sev-warning"><td><a href="#DL3045">DL3045</a></td><td>warning</td><td><code>COPY</code> to a relative destination without <code>WORKDIR</code> set.</td></tr>
+          <tr id="DL3046" class="sev-warning"><td><a href="#DL3046">DL3046</a></td><td>warning</td><td><code>useradd</code> without flag <code>-l</code> and high UID will result in excessively large Image.</td></tr>
+          <tr id="DL3047" class="sev-info"><td><a href="#DL3047">DL3047</a></td><td>info</td><td>Avoid use of wget without progress bar. Use <code>wget --progress=dot:giga &lt;url&gt;</code>. Or consider using <code>-q</code> or <code>-nv</code> (shorthands for <code>--quiet</code> or <code>--no-verbose</code>).</td></tr>
+          <tr id="DL3048" class="sev-style"><td><a href="#DL3048">DL3048</a></td><td>style</td><td>Invalid label key.</td></tr>
+          <tr id="DL3049" class="sev-info"><td><a href="#DL3049">DL3049</a></td><td>info</td><td>Label <code>&lt;label&gt;</code> is missing.</td></tr>
+          <tr id="DL3050" class="sev-info"><td><a href="#DL3050">DL3050</a></td><td>info</td><td>Superfluous label(s) present.</td></tr>
+          <tr id="DL3051" class="sev-warning"><td><a href="#DL3051">DL3051</a></td><td>warning</td><td>Label <code>&lt;label&gt;</code> is empty.</td></tr>
+          <tr id="DL3052" class="sev-warning"><td><a href="#DL3052">DL3052</a></td><td>warning</td><td>Label <code>&lt;label&gt;</code> is not a valid URL.</td></tr>
+          <tr id="DL3053" class="sev-warning"><td><a href="#DL3053">DL3053</a></td><td>warning</td><td>Label <code>&lt;label&gt;</code> is not a valid time format - must conform to RFC3339.</td></tr>
+          <tr id="DL3054" class="sev-warning"><td><a href="#DL3054">DL3054</a></td><td>warning</td><td>Label <code>&lt;label&gt;</code> is not a valid SPDX identifier.</td></tr>
+          <tr id="DL3055" class="sev-warning"><td><a href="#DL3055">DL3055</a></td><td>warning</td><td>Label <code>&lt;label&gt;</code> is not a valid git hash.</td></tr>
+          <tr id="DL3057" class="sev-ignore"><td><a href="#DL3057">DL3057</a></td><td>off by default</td><td><code>HEALTHCHECK</code> instruction missing.</td></tr>
+          <tr id="DL3058" class="sev-warning"><td><a href="#DL3058">DL3058</a></td><td>warning</td><td>Label <code>&lt;label&gt;</code> is not a valid email format - must conform to RFC5322.</td></tr>
+          <tr id="DL3059" class="sev-info"><td><a href="#DL3059">DL3059</a></td><td>info</td><td>Multiple consecutive <code>RUN</code> instructions. Consider consolidation.</td></tr>
+          <tr id="DL3060" class="sev-info"><td><a href="#DL3060">DL3060</a></td><td>info</td><td><code>yarn cache clean</code> missing after <code>yarn install</code> was run.</td></tr>
+          <tr id="DL3061" class="sev-error"><td><a href="#DL3061">DL3061</a></td><td>error</td><td>Invalid instruction order. Dockerfile must begin with <code>FROM</code>, <code>ARG</code> or comment.</td></tr>
+          <tr id="DL3062" class="sev-warning"><td><a href="#DL3062">DL3062</a></td><td>warning</td><td>Pin versions in go. Instead of <code>go install &lt;package&gt;</code> use <code>go install &lt;package&gt;@&lt;version&gt;</code></td></tr>
+          <tr id="DL4000" class="sev-error"><td><a href="#DL4000">DL4000</a></td><td>error</td><td>MAINTAINER is deprecated</td></tr>
+          <tr id="DL4001" class="sev-warning"><td><a href="#DL4001">DL4001</a></td><td>warning</td><td>Either use Wget or Curl but not both</td></tr>
+          <tr id="DL4003" class="sev-warning"><td><a href="#DL4003">DL4003</a></td><td>warning</td><td>Multiple <code>CMD</code> instructions found. If you list more than one <code>CMD</code> then only the last <code>CMD</code> will take effect</td></tr>
+          <tr id="DL4004" class="sev-error"><td><a href="#DL4004">DL4004</a></td><td>error</td><td>Multiple <code>ENTRYPOINT</code> instructions found. If you list more than one <code>ENTRYPOINT</code> then only the last <code>ENTRYPOINT</code> will take effect</td></tr>
+          <tr id="DL4005" class="sev-warning"><td><a href="#DL4005">DL4005</a></td><td>warning</td><td>Use SHELL to change the default shell</td></tr>
+          <tr id="DL4006" class="sev-warning"><td><a href="#DL4006">DL4006</a></td><td>warning</td><td>Set the SHELL option -o pipefail before RUN with a pipe in it. If you are using /bin/sh in an alpine image or if your shell is symlinked to busybox then consider explicitly setting your SHELL to /bin/ash, or disable this check</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rules-more">Shellcheck findings, when the integration is on, are reported alongside these with their own <code>SC</code> codes.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="https://github.com/farcloser">
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M2 14h20"/>
+        <path d="M7 14V5"/>
+        <path class="road" d="M9 19h6"/>
+      </svg>
+      <span class="org">farcloser</span>
+    </a>
+    <span>godolint is Apache-2.0.</span>
+    <nav aria-label="Project links">
+      <a href="https://github.com/farcloser/godolint">Source</a>
+      <a href="https://pkg.go.dev/github.com/farcloser/godolint/sdk">SDK reference</a>
+      <a href="https://github.com/hadolint/hadolint">hadolint</a>
+    </nav>
+  </div>
+</footer>
+
+
+</body>
+</html>
