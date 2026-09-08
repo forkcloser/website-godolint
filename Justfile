@@ -18,9 +18,12 @@ hero:
     # mktemp gets an explicit template because macOS mktemp ignores $TMPDIR.
     tmpdir=$(mktemp -d "${TMPDIR:-/tmp}/hero.XXXXXX")
     trap 'rm -rf "$tmpdir"' EXIT
+    # godolint is a tools/go.mod tool directive, not an aqua package (limen
+    # v0.3.0): build it where limen's own recipes look for it.
+    GOOS='' GOARCH='' go -C tools build -o '../build/tools/' github.com/farcloser/godolint/cmd/godolint
     # Exit status 1 means findings, which is what the sample is for; any other
     # failure leaves an empty or partial file and jq or the diff catches it.
-    godolint --without-shellcheck demo/hero-dockerfile.txt > "$tmpdir/actual.raw" || [ $? -eq 1 ]
+    build/tools/godolint --without-shellcheck demo/hero-dockerfile.txt > "$tmpdir/actual.raw" || [ $? -eq 1 ]
     # Plain files rather than process substitution: sandboxes may deny /dev/fd.
     jq -S . "$tmpdir/actual.raw" > "$tmpdir/actual.json"
     jq -S . demo/hero-expected.json > "$tmpdir/expected.json"
@@ -32,7 +35,10 @@ hero:
 regen:
     #!/usr/bin/env bash
     set -euo pipefail
-    godolint --without-shellcheck demo/hero-dockerfile.txt | jq . > demo/hero-expected.json || [ $? -eq 1 ]
+    # godolint is a tools/go.mod tool directive, not an aqua package (limen
+    # v0.3.0): build it where limen's own recipes look for it.
+    GOOS='' GOARCH='' go -C tools build -o '../build/tools/' github.com/farcloser/godolint/cmd/godolint
+    build/tools/godolint --without-shellcheck demo/hero-dockerfile.txt | jq . > demo/hero-expected.json || [ $? -eq 1 ]
     cat demo/hero-expected.json
 
 # The pages must load nothing from elsewhere: no web fonts, no CDN scripts,
