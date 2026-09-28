@@ -1,6 +1,6 @@
 # website-godolint
 
-The website for [godolint](https://github.com/farcloser/godolint), a pure-Go port of
+The website for [godolint](https://github.com/forkcloser/godolint), a pure-Go port of
 hadolint. Two pages, static, no build step, served at https://godolint.farcloser.world/.
 
 ## Layout
