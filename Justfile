@@ -5,6 +5,8 @@ import '.limen/just/main.just'
 lint: do::lint::default
 fix: do::fix::default
 test: hero external
+# The security workflow runs `just security`.
+security: do::security::default
 
 # The landing page shows godolint's findings for a sample Dockerfile, and the
 # claim is that they are real. Re-run the aqua-pinned godolint over the sample
