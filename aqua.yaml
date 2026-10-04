@@ -34,7 +34,7 @@ packages:
   # Pseudo-version: the nested cmd/dot module carries no tags upstream, so
   # nothing for Renovate to propose either — bumped by hand, deliberately.
   # --- farcloser tools (local registry; standard once registered upstream) ---
-  - name: farcloser/limen@v0.6.2 # renovate: depName=farcloser/limen
+  - name: farcloser/limen@v0.7.0 # renovate: depName=farcloser/limen
     registry: local
   # --- toolchain + binary-release tools (standard registry, aqua-verified) ---
   - name: golang/go@go1.27.1
