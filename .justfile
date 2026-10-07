@@ -22,7 +22,7 @@ hero:
     trap 'rm -rf "$tmpdir"' EXIT
     # godolint is a tools/go.mod tool directive, not an aqua package (limen
     # v0.3.0): build it where limen's own recipes look for it.
-    GOOS='' GOARCH='' go -C tools build -o '../build/tools/' github.com/farcloser/godolint/cmd/godolint
+    GOOS='' GOARCH='' go -C tools build -o '../build/tools/' github.com/forkcloser/godolint/cmd/godolint
     # Exit status 1 means findings, which is what the sample is for; any other
     # failure leaves an empty or partial file and jq or the diff catches it.
     build/tools/godolint --without-shellcheck demo/hero-dockerfile.txt > "$tmpdir/actual.raw" || [ $? -eq 1 ]
@@ -39,7 +39,7 @@ regen:
     set -euo pipefail
     # godolint is a tools/go.mod tool directive, not an aqua package (limen
     # v0.3.0): build it where limen's own recipes look for it.
-    GOOS='' GOARCH='' go -C tools build -o '../build/tools/' github.com/farcloser/godolint/cmd/godolint
+    GOOS='' GOARCH='' go -C tools build -o '../build/tools/' github.com/forkcloser/godolint/cmd/godolint
     build/tools/godolint --without-shellcheck demo/hero-dockerfile.txt | jq . > demo/hero-expected.json || [ $? -eq 1 ]
     cat demo/hero-expected.json
 
