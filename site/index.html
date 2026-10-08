@@ -178,15 +178,15 @@ RUN apt-get install -y curl</code></pre>
       <li class="sev-ignore"><strong>2</strong> off by default</li>
     </ul>
     <div class="table-scroll">
-      <table class="rules">
-        <thead><tr><th>Code</th><th>Severity</th><th>Message</th></tr></thead>
-        <tbody>
-          <tr class="sev-error"><td><a href="rules.html#DL3000">DL3000</a></td><td>error</td><td>Use absolute WORKDIR</td></tr>
-          <tr class="sev-warning"><td><a href="rules.html#DL3007">DL3007</a></td><td>warning</td><td>Using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag</td></tr>
-          <tr class="sev-error"><td><a href="rules.html#DL3020">DL3020</a></td><td>error</td><td>Use COPY instead of ADD for files and folders</td></tr>
-          <tr class="sev-warning"><td><a href="rules.html#DL3062">DL3062</a></td><td>warning</td><td>Pin versions in go. Instead of <code>go install &lt;package&gt;</code> use <code>go install &lt;package&gt;@&lt;version&gt;</code></td></tr>
-          <tr class="sev-info"><td><a href="rules.html#DL3059">DL3059</a></td><td>info</td><td>Multiple consecutive <code>RUN</code> instructions. Consider consolidation.</td></tr>
-          <tr class="sev-error"><td><a href="rules.html#DL4000">DL4000</a></td><td>error</td><td>MAINTAINER is deprecated</td></tr>
+      <table class="rules" role="table">
+        <thead role="rowgroup"><tr role="row"><th role="columnheader">Code</th><th role="columnheader">Severity</th><th role="columnheader">Message</th></tr></thead>
+        <tbody role="rowgroup">
+          <tr class="sev-error" role="row"><td role="cell"><a href="rules.html#DL3000">DL3000</a></td><td role="cell">error</td><td role="cell">Use absolute WORKDIR</td></tr>
+          <tr class="sev-warning" role="row"><td role="cell"><a href="rules.html#DL3007">DL3007</a></td><td role="cell">warning</td><td role="cell">Using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag</td></tr>
+          <tr class="sev-error" role="row"><td role="cell"><a href="rules.html#DL3020">DL3020</a></td><td role="cell">error</td><td role="cell">Use COPY instead of ADD for files and folders</td></tr>
+          <tr class="sev-warning" role="row"><td role="cell"><a href="rules.html#DL3062">DL3062</a></td><td role="cell">warning</td><td role="cell">Pin versions in go. Instead of <code>go install &lt;package&gt;</code> use <code>go install &lt;package&gt;@&lt;version&gt;</code></td></tr>
+          <tr class="sev-info" role="row"><td role="cell"><a href="rules.html#DL3059">DL3059</a></td><td role="cell">info</td><td role="cell">Multiple consecutive <code>RUN</code> instructions. Consider consolidation.</td></tr>
+          <tr class="sev-error" role="row"><td role="cell"><a href="rules.html#DL4000">DL4000</a></td><td role="cell">error</td><td role="cell">MAINTAINER is deprecated</td></tr>
         </tbody>
       </table>
     </div>
