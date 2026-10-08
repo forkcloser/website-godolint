@@ -4,7 +4,7 @@ import '.limen/just/main.just'
 
 lint: do::lint::default
 fix: do::fix::default
-test: hero external
+test: hero external pin
 # The security workflow runs `just security`.
 security: do::security::default
 
@@ -42,6 +42,23 @@ regen:
     GOOS='' GOARCH='' go -C tools build -o '../build/tools/' github.com/forkcloser/godolint/cmd/godolint
     build/tools/godolint --without-shellcheck demo/hero-dockerfile.txt | jq . > demo/hero-expected.json || [ $? -eq 1 ]
     cat demo/hero-expected.json
+
+# The install commands on the landing page name a version, as DL3062 on the
+# same page asks of everyone else, and it is the version the site is written
+# against: the godolint pinned in tools/go.mod, the one the hero recipe runs.
+# Renovate bumps the pin; this fails until the page follows.
+pin:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "test: pin" >&2
+    want=$(grep -E '^\s*github.com/forkcloser/godolint v' tools/go.mod | awk '{print $2}')
+    [ -n "$want" ] || { echo "test: tools/go.mod does not pin github.com/forkcloser/godolint" >&2; exit 1; }
+    shown=$(grep -oE 'github.com/forkcloser/godolint(/cmd/godolint)?@[^<[:space:]]+' site/index.html | sed 's/.*@//')
+    [ "$(printf '%s\n' "$shown" | wc -l)" -eq 2 ] || { echo "test: expected two install commands in site/index.html, found:" >&2; printf '%s\n' "$shown" >&2; exit 1; }
+    for v in $shown; do
+        [ "$v" = "$want" ] || { echo "test: site/index.html installs godolint@$v, tools/go.mod pins $want" >&2; exit 1; }
+    done
+    echo "test: install commands pin godolint $want" >&2
 
 # The pages must load nothing from elsewhere: no web fonts, no CDN scripts,
 # no hotlinked images. Every load is a request to a third party on each
