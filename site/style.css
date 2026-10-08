@@ -137,3 +137,27 @@ details.raw pre { font-size: var(--text-xs); }
   .hero { grid-template-columns: minmax(0, 1fr); gap: var(--s-8); padding-top: var(--s-8); }
   .diag { margin-left: var(--s-4); }
 }
+
+/* On a phone the three columns do not fit, and a 65-row table scrolled
+ * sideways is unreadable. Each row reflows: code and severity on one line,
+ * the message beneath. The header row is hidden from sight only; the roles
+ * on the markup keep it a table for assistive technology, which browsers
+ * otherwise drop once a table element is no longer displayed as one. */
+@media (max-width: 600px) {
+  .rules, .rules tbody, .rules tr, .rules td { display: block; }
+  .rules thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .rules tr { padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+  .rules td { padding: 0; border: 0; }
+  .rules td:first-child, .rules td:nth-child(2) { display: inline; }
+  .rules td:nth-child(2) { margin-left: var(--s-3); }
+  .rules td:last-child { margin-top: var(--s-1); max-width: var(--measure); }
+  .rules tr:target { background: var(--surface); box-shadow: 0 0 0 var(--s-2) var(--surface); }
+  .rules tr:target td { background: none; }
+}
