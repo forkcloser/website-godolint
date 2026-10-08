@@ -1,9 +1,9 @@
-/* godolint — what is particular to this site, on top of farcloser.css:
+/* godolint — what is particular to this site, on top of forkcloser.css:
  * the severity colours, the hero layout, and the annotated Dockerfile. */
 
 :root {
   --error: #a93a2e;
-  --warning: #8a660a;
+  --warning: #7a5a08;
   --info: #35597a;
   --style: #626a72;
 }

@@ -1,4 +1,4 @@
-// Farcloser — theme switch.
+// Forkcloser — theme switch.
 //
 // Three states, cycled by one button: system (the default, follows the OS),
 // light, dark. The choice is kept in this browser only; "system" clears it.
@@ -24,8 +24,8 @@
       root.setAttribute("data-theme", state);
     }
     try {
-      if (state === "system") localStorage.removeItem("farcloser-theme");
-      else localStorage.setItem("farcloser-theme", state);
+      if (state === "system") localStorage.removeItem("forkcloser-theme");
+      else localStorage.setItem("forkcloser-theme", state);
     } catch (e) {}
     label();
   }

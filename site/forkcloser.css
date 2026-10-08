@@ -1,4 +1,4 @@
-/* Farcloser — shared visual identity for project sites.
+/* Forkcloser — shared visual identity for project sites.
  *
  * Scope: everything a project site inherits — colour, type, rhythm, the page
  * chrome (header, footer, navigation, theme switch), and the styling of
@@ -14,31 +14,34 @@
  *  - Motion answers the reader (a theme change, a disclosure) and is short.
  *    Reduced-motion turns it off entirely.
  *
- * Palette. From the Farcloser picture — an empty road across a salt flat
- * under an overcast range. Light is the flat and the sky; dark is the road
- * at night. The one accent is the road's painted line, used sparingly: the
- * mark, focus rings, and the horizon dash on section dividers.
+ * Palette. From the Forkcloser picture — a steel fork on an oak table, a
+ * stoneware plate behind it, window light. Light is the plate and the
+ * light; dark is the oak at night. The ink is the steel. The one accent is
+ * the wood, used sparingly: the table line under the mark, focus rings, and
+ * the dash on section dividers. Farcloser's identity is this one's twin,
+ * the same structure with the temperature flipped: a cool flat with one
+ * warm line there, a warm table with one cool object here.
  */
 
 :root {
   /* Grounds and lines */
-  --bg: #fbfbf9;
-  --surface: #f1f2ee;
-  --code-bg: #eef0ec;
-  --line: #d3d6d0;
-  --line-strong: #1c2024;
+  --bg: #fbf8f2;
+  --surface: #f2ecdf;
+  --code-bg: #efe8da;
+  --line: #d9d0bf;
+  --line-strong: #23262a;
 
   /* Text */
-  --ink: #1c2024;
-  --ink-2: #4a5159;
-  --ink-3: #626a72;
+  --ink: #23262a;
+  --ink-2: #4e545a;
+  --ink-3: #5d646b;
 
   /* Roles */
-  --accent: #8a660a;
-  --link: #35597a;
-  --link-hover: #1c2024;
-  --focus: #8a660a;
-  --selection: #e9dcae;
+  --accent: #965618;
+  --link: #3d5d78;
+  --link-hover: #23262a;
+  --focus: #965618;
+  --selection: #ead9bd;
 
   /* Type */
   --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -76,37 +79,37 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1a1f24;
-    --surface: #22282e;
-    --code-bg: #262d34;
-    --line: #384049;
-    --line-strong: #e6e7e3;
-    --ink: #e6e7e3;
-    --ink-2: #b4bac0;
-    --ink-3: #8c949c;
-    --accent: #e2bd48;
-    --link: #8fb4d6;
-    --link-hover: #e6e7e3;
-    --focus: #e2bd48;
-    --selection: #4a4320;
+    --bg: #1d1a16;
+    --surface: #26221d;
+    --code-bg: #2b261f;
+    --line: #403a31;
+    --line-strong: #e8e3d8;
+    --ink: #e8e3d8;
+    --ink-2: #bdb5a8;
+    --ink-3: #9a9285;
+    --accent: #dca45f;
+    --link: #9fbbd4;
+    --link-hover: #e8e3d8;
+    --focus: #dca45f;
+    --selection: #4a3a22;
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #1a1f24;
-  --surface: #22282e;
-  --code-bg: #262d34;
-  --line: #384049;
-  --line-strong: #e6e7e3;
-  --ink: #e6e7e3;
-  --ink-2: #b4bac0;
-  --ink-3: #8c949c;
-  --accent: #e2bd48;
-  --link: #8fb4d6;
-  --link-hover: #e6e7e3;
-  --focus: #e2bd48;
-  --selection: #4a4320;
+  --bg: #1d1a16;
+  --surface: #26221d;
+  --code-bg: #2b261f;
+  --line: #403a31;
+  --line-strong: #e8e3d8;
+  --ink: #e8e3d8;
+  --ink-2: #bdb5a8;
+  --ink-3: #9a9285;
+  --accent: #dca45f;
+  --link: #9fbbd4;
+  --link-hover: #e8e3d8;
+  --focus: #dca45f;
+  --selection: #4a3a22;
   color-scheme: dark;
 }
 
@@ -259,15 +262,15 @@ h1 code { font-size: 0.9em; font-weight: 500; }
 }
 .brand .sep { color: var(--line); font-weight: 400; }
 
-/* The mark: a horizon and a pole, two strokes in the text colour, and the
- * road line beneath in the accent. Sized by font, so it sits with the name. */
+/* The mark: a fork in the text colour resting on the table line beneath,
+ * in the accent. Sized by font, so it sits with the name. */
 .mark {
   width: 1.4em;
   height: 1.4em;
   flex: none;
   color: var(--ink);
 }
-.mark .road { stroke: var(--accent); }
+.mark .table { stroke: var(--accent); }
 
 .nav {
   display: flex;
@@ -311,8 +314,8 @@ h1 code { font-size: 0.9em; font-weight: 500; }
 
 main { display: block; }
 
-/* Sections divide on the horizon: a hairline, and the road's dash at the
- * left edge. The dash is the only decoration on the page. */
+/* Sections divide on a hairline, with the table's dash at the left edge.
+ * The dash is the only decoration on the page. */
 section {
   position: relative;
   padding: var(--s-16) 0;

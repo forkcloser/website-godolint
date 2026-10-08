@@ -6,7 +6,7 @@
 # hash of its exact bytes — change the snippet and the hash must follow
 # (sha256 of the text between the script tags, base64).
 /*
-  Content-Security-Policy: default-src 'none'; script-src 'self' 'sha256-k0F8HMwG8cBf1YtE3NqUHhy1p/WbgQD+f+FzWnQgpFI='; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'sha256-C0uXeDV9tJo2Qt/ZbRdI+u33ZJpmBV9SzHuGK1zdMlg='; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
