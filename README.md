@@ -1,7 +1,7 @@
 # website-godolint
 
 The website for [godolint](https://github.com/forkcloser/godolint), a pure-Go port of
-hadolint. Two pages, static, no build step, served at https://godolint.farcloser.world/.
+hadolint. Two pages, static, no build step, served at https://godolint.forkcloser.org/.
 
 ## Layout
 
@@ -43,7 +43,9 @@ to it. It lives here for now and will be split out once a second site uses it.
 
 ## Publishing
 
-Cloudflare Pages is connected to this repository: a push to `main` deploys `site/` as
-committed, and every other branch gets a preview at `<branch>.website-godolint.pages.dev`.
-There is no build step and no deploy workflow here. DNS for `farcloser.world` stays at
-Gandi, where `godolint` is a CNAME to `website-godolint.pages.dev`.
+The site is deployed by Cloudflare Pages from this repository: a push to `main` deploys
+`site/` as committed, and every other branch gets a preview at
+`<branch>.website-godolint.pages.dev`. There is no build step and no deploy workflow here.
+The Pages project, the custom domain and the DNS record are declared in
+[forkcloser/infra](https://github.com/forkcloser/infra), not configured by hand: the zone
+`forkcloser.org` is served by deSEC, delegated from Gandi, where the registration stays.
