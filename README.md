@@ -7,7 +7,7 @@ hadolint. Two pages, static, no build step, served at https://godolint.farcloser
 
 | Path | What |
 |------|------|
-| `site/` | The site as served. `farcloser.css` and `farcloser.js` are the shared Farcloser identity (tokens, chrome, light and dark themes, the theme switch); `style.css` is what is particular to godolint. No build step, no web fonts, no third-party requests. |
+| `site/` | The site as served. `forkcloser.css` and `forkcloser.js` are the shared Forkcloser identity (tokens, chrome, light and dark themes, the theme switch); `style.css` is what is particular to godolint. No build step, no web fonts, no third-party requests. |
 | `site/_headers`, `site/_redirects` | Read by Cloudflare Pages: the response headers (a same-origin Content-Security-Policy, HSTS, and friends) and the redirect from the `pages.dev` hostname to the real one. |
 | `demo/` | The sample Dockerfile the landing page annotates, and the output the pinned `godolint` produces for it. |
 
@@ -28,20 +28,18 @@ The findings shown on the landing page are copied from `demo/hero-expected.json`
 annotations in `site/index.html` to match; the install commands on the page name the same
 version as `tools/go.mod` and follow each bump too.
 
-## The Farcloser identity
+## The Forkcloser identity
 
-`site/farcloser.css` is the visual identity every Farcloser project site inherits unless it
+`site/forkcloser.css` is the visual identity every Forkcloser project site inherits unless it
 has one of its own: colour tokens for a light and a dark theme, system typefaces, an 8px
-rhythm, the header and footer with the mark, and the styling of ordinary content. Every
-text colour is verified against WCAG AA on each ground it appears on. `site/farcloser.js`
-wires the theme switch; the pages follow the system theme until the reader chooses, and
-a three-line inline script in each head applies that choice before first paint. The
-project's own stylesheet comes after and only adds what is specific to it. It lives here
-for now and will be split out once a second site uses it.
-
-The rules table in `site/rules.html` is written from the rule metadata in godolint's
-`internal/rules/dl*.go` files (code, severity, message), one row per rule. It is updated by
-hand when godolint gains or changes rules.
+rhythm, the header and footer with the mark, and the styling of ordinary content. The
+palette comes from the Forkcloser picture, a steel fork on an oak table: warm grounds, steel
+ink, the wood as the one accent. Farcloser's identity is its twin, the same structure with
+the temperature flipped. Every text colour is verified against WCAG AA on each ground it
+appears on. `site/forkcloser.js` wires the theme switch; the pages follow the system theme
+until the reader chooses, and a three-line inline script in each head applies that choice
+before first paint. The project's own stylesheet comes after and only adds what is specific
+to it. It lives here for now and will be split out once a second site uses it.
 
 ## Publishing
 
