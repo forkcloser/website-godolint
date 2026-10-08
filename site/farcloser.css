@@ -50,6 +50,7 @@
   --h3: 1.125rem;
   --h2: 1.5rem;
   --h1: clamp(2.1rem, 1.3rem + 3vw, 3.1rem);
+  --h1-page: 2rem;
   --leading: 1.6;
   --measure: 64ch;
 
@@ -169,6 +170,9 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 h1 { font-size: var(--h1); line-height: 1.08; letter-spacing: -0.02em; }
+/* A secondary page's title: a heading, not a statement, so it sits between
+ * the landing page's h1 and an h2. Every page has exactly one h1. */
+h1.page { font-size: var(--h1-page); line-height: 1.15; margin-bottom: var(--s-3); }
 h2 { font-size: var(--h2); margin-bottom: var(--s-3); }
 h3 { font-size: var(--h3); margin-bottom: var(--s-2); }
 * + h3 { margin-top: var(--s-8); }
