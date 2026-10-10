@@ -1,14 +1,14 @@
 # website-godolint
 
 The website for [godolint](https://github.com/forkcloser/godolint), a pure-Go port of
-hadolint. Two pages, static, no build step, served at https://godolint.farcloser.world/.
+hadolint. Two pages, static, no build step, served at https://godolint.forkcloser.org/.
 
 ## Layout
 
 | Path | What |
 |------|------|
 | `site/` | The site as served. `forkcloser.css` and `forkcloser.js` are the shared Forkcloser identity (tokens, chrome, light and dark themes, the theme switch); `style.css` is what is particular to godolint. No build step, no web fonts, no third-party requests. |
-| `site/_headers`, `site/_redirects` | Read by Cloudflare Pages: the response headers (a same-origin Content-Security-Policy, HSTS, and friends) and the redirect from the `pages.dev` hostname to the real one. |
+| `site/_headers` | Read by Cloudflare Pages: the response headers, a same-origin Content-Security-Policy, HSTS, and friends. |
 | `demo/` | The sample Dockerfile the landing page annotates, and the output the pinned `godolint` produces for it. |
 
 ## Working on it
@@ -43,7 +43,9 @@ to it. It lives here for now and will be split out once a second site uses it.
 
 ## Publishing
 
-Cloudflare Pages is connected to this repository: a push to `main` deploys `site/` as
-committed, and every other branch gets a preview at `<branch>.website-godolint.pages.dev`.
-There is no build step and no deploy workflow here. DNS for `farcloser.world` stays at
-Gandi, where `godolint` is a CNAME to `website-godolint.pages.dev`.
+The site is deployed by Cloudflare Pages from this repository: a push to `main` deploys
+`site/` as committed, and every other branch gets a preview at
+`<branch>.website-godolint.pages.dev`. There is no build step and no deploy workflow here.
+The Pages project, the custom domain and the DNS record are declared in
+[forkcloser/infra](https://github.com/forkcloser/infra), not configured by hand: the zone
+`forkcloser.org` is served by deSEC, delegated from Gandi, where the registration stays.
