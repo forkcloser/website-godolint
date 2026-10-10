@@ -48,12 +48,12 @@
 <section class="plain">
   <div class="wrap">
     <h1 class="page">Rules</h1>
-    <p class="intro">The rules godolint implements, with the code, severity and message each reports. All of them come from hadolint; <a href="https://github.com/hadolint/hadolint/wiki">hadolint's wiki</a> documents each code in detail.</p>
+    <p class="intro">The rules godolint implements, with the code, severity and message each reports. All of them come from hadolint 2.15.1; <a href="https://github.com/hadolint/hadolint/wiki">hadolint's wiki</a> documents each code in detail.</p>
     <p>Two rules are off by default, as in hadolint: DL1001 objects to inline ignore pragmas, and DL3057 asks for a <code>HEALTHCHECK</code>. Enable them explicitly if needed. <code>RuleSetRecommended</code> keeps only the error and warning rows below. Messages shown as <code>Label &lt;label&gt;</code> name the offending label when reported.</p>
     <ul class="tally" aria-label="Rules by severity">
       <li class="sev-error"><strong>14</strong> error</li>
-      <li class="sev-warning"><strong>38</strong> warning</li>
-      <li class="sev-info"><strong>10</strong> info</li>
+      <li class="sev-warning"><strong>43</strong> warning</li>
+      <li class="sev-info"><strong>11</strong> info</li>
       <li class="sev-style"><strong>1</strong> style</li>
       <li class="sev-ignore"><strong>2</strong> off by default</li>
     </ul>
@@ -109,17 +109,23 @@
           <tr id="DL3048" class="sev-style" role="row"><td role="cell"><a href="#DL3048">DL3048</a></td><td role="cell">style</td><td role="cell">Invalid label key.</td></tr>
           <tr id="DL3049" class="sev-info" role="row"><td role="cell"><a href="#DL3049">DL3049</a></td><td role="cell">info</td><td role="cell">Label <code>&lt;label&gt;</code> is missing.</td></tr>
           <tr id="DL3050" class="sev-info" role="row"><td role="cell"><a href="#DL3050">DL3050</a></td><td role="cell">info</td><td role="cell">Superfluous label(s) present.</td></tr>
-          <tr id="DL3051" class="sev-warning" role="row"><td role="cell"><a href="#DL3051">DL3051</a></td><td role="cell">warning</td><td role="cell">Label <code>&lt;label&gt;</code> is empty.</td></tr>
+          <tr id="DL3051" class="sev-warning" role="row"><td role="cell"><a href="#DL3051">DL3051</a></td><td role="cell">warning</td><td role="cell">label <code>&lt;label&gt;</code> is empty.</td></tr>
           <tr id="DL3052" class="sev-warning" role="row"><td role="cell"><a href="#DL3052">DL3052</a></td><td role="cell">warning</td><td role="cell">Label <code>&lt;label&gt;</code> is not a valid URL.</td></tr>
           <tr id="DL3053" class="sev-warning" role="row"><td role="cell"><a href="#DL3053">DL3053</a></td><td role="cell">warning</td><td role="cell">Label <code>&lt;label&gt;</code> is not a valid time format - must conform to RFC3339.</td></tr>
           <tr id="DL3054" class="sev-warning" role="row"><td role="cell"><a href="#DL3054">DL3054</a></td><td role="cell">warning</td><td role="cell">Label <code>&lt;label&gt;</code> is not a valid SPDX identifier.</td></tr>
           <tr id="DL3055" class="sev-warning" role="row"><td role="cell"><a href="#DL3055">DL3055</a></td><td role="cell">warning</td><td role="cell">Label <code>&lt;label&gt;</code> is not a valid git hash.</td></tr>
+          <tr id="DL3056" class="sev-warning" role="row"><td role="cell"><a href="#DL3056">DL3056</a></td><td role="cell">warning</td><td role="cell">Label <code>&lt;label&gt;</code> does not conform to semantic versioning.</td></tr>
           <tr id="DL3057" class="sev-ignore" role="row"><td role="cell"><a href="#DL3057">DL3057</a></td><td role="cell">off by default</td><td role="cell"><code>HEALTHCHECK</code> instruction missing.</td></tr>
           <tr id="DL3058" class="sev-warning" role="row"><td role="cell"><a href="#DL3058">DL3058</a></td><td role="cell">warning</td><td role="cell">Label <code>&lt;label&gt;</code> is not a valid email format - must conform to RFC5322.</td></tr>
           <tr id="DL3059" class="sev-info" role="row"><td role="cell"><a href="#DL3059">DL3059</a></td><td role="cell">info</td><td role="cell">Multiple consecutive <code>RUN</code> instructions. Consider consolidation.</td></tr>
           <tr id="DL3060" class="sev-info" role="row"><td role="cell"><a href="#DL3060">DL3060</a></td><td role="cell">info</td><td role="cell"><code>yarn cache clean</code> missing after <code>yarn install</code> was run.</td></tr>
           <tr id="DL3061" class="sev-error" role="row"><td role="cell"><a href="#DL3061">DL3061</a></td><td role="cell">error</td><td role="cell">Invalid instruction order. Dockerfile must begin with <code>FROM</code>, <code>ARG</code> or comment.</td></tr>
           <tr id="DL3062" class="sev-warning" role="row"><td role="cell"><a href="#DL3062">DL3062</a></td><td role="cell">warning</td><td role="cell">Pin versions in go. Instead of <code>go install &lt;package&gt;</code> use <code>go install &lt;package&gt;@&lt;version&gt;</code></td></tr>
+          <tr id="DL3063" class="sev-warning" role="row"><td role="cell"><a href="#DL3063">DL3063</a></td><td role="cell">warning</td><td role="cell">stage name should not be a reserved word</td></tr>
+          <tr id="DL3064" class="sev-warning" role="row"><td role="cell"><a href="#DL3064">DL3064</a></td><td role="cell">warning</td><td role="cell">Potentially sensitive data should not be used in the <code>ARG</code> or <code>ENV</code> commands</td></tr>
+          <tr id="DL3065" class="sev-warning" role="row"><td role="cell"><a href="#DL3065">DL3065</a></td><td role="cell">warning</td><td role="cell">Setting <code>FROM --platform</code> to predefined <code>$TARGETPLATFORM</code> in is redundant as this is the default behavior</td></tr>
+          <tr id="DL3066" class="sev-info" role="row"><td role="cell"><a href="#DL3066">DL3066</a></td><td role="cell">info</td><td role="cell">Non-numeric user-id may not be resolvable by host system</td></tr>
+          <tr id="DL3067" class="sev-warning" role="row"><td role="cell"><a href="#DL3067">DL3067</a></td><td role="cell">warning</td><td role="cell">Do not copy an entire filesystem from another stage</td></tr>
           <tr id="DL4000" class="sev-error" role="row"><td role="cell"><a href="#DL4000">DL4000</a></td><td role="cell">error</td><td role="cell">MAINTAINER is deprecated</td></tr>
           <tr id="DL4001" class="sev-warning" role="row"><td role="cell"><a href="#DL4001">DL4001</a></td><td role="cell">warning</td><td role="cell">Either use Wget or Curl but not both</td></tr>
           <tr id="DL4003" class="sev-warning" role="row"><td role="cell"><a href="#DL4003">DL4003</a></td><td role="cell">warning</td><td role="cell">Multiple <code>CMD</code> instructions found. If you list more than one <code>CMD</code> then only the last <code>CMD</code> will take effect</td></tr>

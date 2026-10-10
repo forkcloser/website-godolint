@@ -52,9 +52,9 @@
     <p class="lede">godolint lints Dockerfiles. It implements hadolint's rules, with the same codes, severities and messages, as a pure Go library with no binary dependencies, plus a small command-line wrapper.</p>
     <div class="install">
       <p class="label">Library</p>
-      <pre><code>go get github.com/forkcloser/godolint@v0.2.0</code></pre>
+      <pre><code>go get github.com/forkcloser/godolint@v0.3.0</code></pre>
       <p class="label">Command line</p>
-      <pre><code>go install github.com/forkcloser/godolint/cmd/godolint@v0.2.0</code></pre>
+      <pre><code>go install github.com/forkcloser/godolint/cmd/godolint@v0.3.0</code></pre>
     </div>
   </div>
 
@@ -169,11 +169,11 @@ RUN apt-get install -y curl</code></pre>
 <section>
   <div class="wrap">
     <h2>Rules</h2>
-    <p class="intro">Rule metadata and the test corpus are generated from hadolint's source. godolint passes hadolint's unit tests and reports the same code, severity and message for each rule.</p>
+    <p class="intro">Rule metadata and the test corpus are generated from hadolint 2.15.1's source. godolint passes hadolint's unit tests and reports the same code, severity and message for each rule.</p>
     <ul class="tally" aria-label="Rules by severity">
       <li class="sev-error"><strong>14</strong> error</li>
-      <li class="sev-warning"><strong>38</strong> warning</li>
-      <li class="sev-info"><strong>10</strong> info</li>
+      <li class="sev-warning"><strong>43</strong> warning</li>
+      <li class="sev-info"><strong>11</strong> info</li>
       <li class="sev-style"><strong>1</strong> style</li>
       <li class="sev-ignore"><strong>2</strong> off by default</li>
     </ul>
