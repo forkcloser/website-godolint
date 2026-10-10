@@ -8,7 +8,7 @@ hadolint. Two pages, static, no build step, served at https://godolint.forkclose
 | Path | What |
 |------|------|
 | `site/` | The site as served. `forkcloser.css` and `forkcloser.js` are the shared Forkcloser identity (tokens, chrome, light and dark themes, the theme switch); `style.css` is what is particular to godolint. No build step, no web fonts, no third-party requests. |
-| `site/_headers`, `site/_redirects` | Read by Cloudflare Pages: the response headers (a same-origin Content-Security-Policy, HSTS, and friends) and the redirect from the `pages.dev` hostname to the real one. |
+| `site/_headers` | Read by Cloudflare Pages: the response headers, a same-origin Content-Security-Policy, HSTS, and friends. |
 | `demo/` | The sample Dockerfile the landing page annotates, and the output the pinned `godolint` produces for it. |
 
 ## Working on it
