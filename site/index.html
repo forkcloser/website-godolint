@@ -52,9 +52,9 @@
     <p class="lede">godolint lints Dockerfiles. It implements hadolint's rules, with the same codes, severities and messages, as a pure Go library with no binary dependencies, plus a small command-line wrapper.</p>
     <div class="install">
       <p class="label">Library</p>
-      <pre><code>go get github.com/forkcloser/godolint@v0.3.0</code></pre>
+      <pre><code>go get github.com/forkcloser/godolint@v0.4.0</code></pre>
       <p class="label">Command line</p>
-      <pre><code>go install github.com/forkcloser/godolint/cmd/godolint@v0.3.0</code></pre>
+      <pre><code>go install github.com/forkcloser/godolint/cmd/godolint@v0.4.0</code></pre>
     </div>
   </div>
 
@@ -157,11 +157,16 @@ godolint --without-shellcheck Dockerfile
 <span class="c"># Pass a configuration file to shellcheck</span>
 godolint --shellcheck-rcfile .shellcheckrc Dockerfile
 
-<span class="c"># Ignore "# hadolint ignore=DLxxxx" pragmas</span>
+<span class="c"># Ignore the pragmas: ignore=, stage ignore=, global ignore=</span>
 godolint --disable-ignore-pragma Dockerfile</code></pre>
-      <p>Inline pragmas use hadolint's syntax, so existing Dockerfiles keep their exceptions:</p>
-      <pre><code><span class="c"># hadolint ignore=DL3008</span>
-RUN apt-get install -y curl</code></pre>
+      <p>Pragmas use hadolint's syntax, so existing Dockerfiles keep their exceptions. <code>ignore</code> covers the next line, <code>stage ignore</code>, written above a <code>FROM</code>, the stage that <code>FROM</code> starts, and <code>global ignore</code> the whole file. A list with a name that is not a rule code is not a pragma at all, as in hadolint.</p>
+      <pre><code><span class="c"># hadolint global ignore=DL3008</span>
+FROM debian:bookworm
+<span class="c"># hadolint ignore=DL3006,DL3007</span>
+FROM ubuntu
+<span class="c"># hadolint stage ignore=DL3002</span>
+FROM alpine
+USER root</code></pre>
     </div>
   </div>
 </section>
@@ -194,7 +199,7 @@ RUN apt-get install -y curl</code></pre>
     <h3>Relationship with hadolint</h3>
     <p>hadolint is the upstream. Proposals for new core rules belong there; godolint follows hadolint's rule set and does not add its own. Parsing uses <a href="https://github.com/moby/buildkit">buildkit</a>, the parser Docker itself uses.</p>
     <h3>Shellcheck</h3>
-    <p>hadolint checks the shell in <code>RUN</code> instructions by invoking shellcheck. godolint can do the same, tracking <code>ENV</code>, <code>ARG</code>, <code>SHELL</code> and multi-stage <code>FROM</code> the way hadolint does. In the SDK it is an explicit opt-in, since it reintroduces a dependency on an external binary. The command line enables it when a shellcheck is found on <code>PATH</code>, and <code>--without-shellcheck</code> turns it off. Running shellcheck on scripts directly, outside the Dockerfile linter, is the recommended setup.</p>
+    <p>hadolint checks the shell in <code>RUN</code> instructions by invoking shellcheck. godolint can do the same, tracking <code>ENV</code>, <code>ARG</code> and <code>SHELL</code> the way hadolint does: a <code>FROM</code> starts from the defaults, or from the stage it names, <code>SHELL</code> included; <code># hadolint shell=</code> sets the shell for a stage, or for every stage when it comes before the first instruction; and the exec form, <code>RUN ["cmd", "arg"]</code>, which no shell runs, is not checked. In the SDK it is an explicit opt-in, since it reintroduces a dependency on an external binary. The command line enables it when a shellcheck is found on <code>PATH</code>, and <code>--without-shellcheck</code> turns it off. Running shellcheck on scripts directly, outside the Dockerfile linter, is the recommended setup.</p>
   </div>
 </section>
 
