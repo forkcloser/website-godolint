@@ -19,14 +19,14 @@ Open `site/index.html` in a browser; the pages are plain files and need no serve
 just lint    # the shared limen baseline: limen, just, links, yaml, shell, dockerfile, commits
 just test    # hero: re-lint the sample and diff against demo/hero-expected.json
              # external: fail if any page loads a resource from another host
-             # pin: fail if the install commands name a godolint other than tools/go.mod's
+             # pin: fail if the install commands name a godolint other than .limen/tools/go.mod's
 just regen   # rewrite demo/hero-expected.json after editing the sample
 ```
 
 The findings shown on the landing page are copied from `demo/hero-expected.json`. When
 `just test` fails after a `godolint` bump, run `just regen`, read the diff, and update the
 annotations in `site/index.html` to match; the install commands on the page name the same
-version as `tools/go.mod` and follow each bump too.
+version as `.limen/tools/go.mod` and follow each bump too.
 
 ## The Forkcloser identity
 
