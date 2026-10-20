@@ -4,7 +4,7 @@ import '.limen/just/main.just'
 
 lint: do::lint::default
 fix: do::fix::default
-test: hero external pin
+test: hero rules external pin
 # The security workflow runs `just security`.
 security: do::security::default
 
@@ -58,6 +58,66 @@ pin:
         [ "$v" = "$want" ] || { echo "test: site/index.html installs godolint@$v, .limen/tools/go.mod pins $want" >&2; exit 1; }
     done
     echo "test: install commands pin godolint $want" >&2
+
+# The rules page is the pinned godolint's rule list, and the claim is that
+# it is complete and exact. List the module's rules (hack/rules/main.go,
+# run inside limen's tools module so the pin is the one .limen/tools/go.mod
+# holds) and diff them against the page's rows: code, severity, message.
+# The landing page's excerpt must be rows of that list, and the tally on
+# each page must count what the list counts. A godolint bump that adds,
+# drops or reclassifies a rule fails here until the pages follow.
+rules:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "test: rules" >&2
+    # mktemp gets an explicit template because macOS mktemp ignores $TMPDIR.
+    tmpdir=$(mktemp -d "${TMPDIR:-/tmp}/rules.XXXXXX")
+    trap 'rm -rf "$tmpdir"' EXIT
+    tab=$(printf '\t')
+    # Both sides squeeze runs of spaces, as a browser does when it renders
+    # the page, and sort by code: the order of the rows is the page's own.
+    GOOS='' GOARCH='' CGO_ENABLED=0 go -C .limen/tools run "$PWD/hack/rules/main.go" | tr -s ' ' | tr -d '\r' | LC_ALL=C sort > "$tmpdir/module.tsv"
+    [ -s "$tmpdir/module.tsv" ] || { echo "test: the pinned godolint listed no rules" >&2; exit 1; }
+    # A page row, reduced to the same three fields: the code from the row's
+    # link, the severity cell ("off by default" is hadolint's ignore), and
+    # the message cell with its code spans back to the backticks the module
+    # carries, any other markup dropped, and its entities decoded.
+    rows() {
+        sed -nE "s~^[[:space:]]*<tr[^>]*role=\"row\"><td role=\"cell\"><a href=\"[^\"]*(DL[0-9]+)\">[^<]*</a></td><td role=\"cell\">([^<]*)</td><td role=\"cell\">(.*)</td></tr>[[:space:]]*\$~\\1${tab}\\2${tab}\\3~p" "$1" \
+            | sed -E 's~</?code>~`~g; s~<[^>]+>~~g; s~&lt;~<~g; s~&gt;~>~g; s~&quot;~"~g; s~&#39;~'"'"'~g; s~&amp;~\&~g' \
+            | sed -E "s~${tab}off by default${tab}~${tab}ignore${tab}~" \
+            | tr -s ' ' | tr -d '\r' | LC_ALL=C sort
+    }
+    # The label rules (DL3049, DL3051 to DL3056, DL3058) complete their
+    # message per violation with the label's name, and the module's metadata
+    # holds only the prefix, up to an open backtick; the page's wording of
+    # those ("Label `<label>` is missing.") is the page's, so for them only
+    # the code and the severity are compared.
+    awk -F'\t' '$3 ~ /`$/ { print $1 }' "$tmpdir/module.tsv" > "$tmpdir/templated"
+    mask() {
+        awk -F'\t' -v OFS='\t' 'NR == FNR { t[$1] = 1; next } ($1 in t) { $3 = "(completed per violation)" } { print }' "$tmpdir/templated" "$1"
+    }
+    mask "$tmpdir/module.tsv" > "$tmpdir/module.masked"
+    rows site/rules.html | mask /dev/stdin > "$tmpdir/page.tsv"
+    if ! diff -u "$tmpdir/module.masked" "$tmpdir/page.tsv" >&2; then
+        echo "test: site/rules.html does not list the pinned godolint's rules (- module, + page)" >&2
+        exit 1
+    fi
+    rows site/index.html | mask /dev/stdin > "$tmpdir/excerpt.tsv"
+    [ -s "$tmpdir/excerpt.tsv" ] || { echo "test: site/index.html shows no rule rows" >&2; exit 1; }
+    if grep -vxF -f "$tmpdir/module.masked" "$tmpdir/excerpt.tsv" > "$tmpdir/stray.tsv"; then
+        cat "$tmpdir/stray.tsv" >&2
+        echo "test: site/index.html shows rows that are not the pinned godolint's (listed above)" >&2
+        exit 1
+    fi
+    for page in site/index.html site/rules.html; do
+        for sev in error warning info style ignore; do
+            want=$(awk -F'\t' -v s="$sev" '$2 == s' "$tmpdir/module.tsv" | wc -l | tr -d ' ')
+            shown=$(grep -oE "<li class=\"sev-$sev\"><strong>[0-9]+" "$page" | grep -oE '[0-9]+$' || true)
+            [ "$shown" = "$want" ] || { echo "test: $page tallies $sev as '$shown', the pinned godolint has $want" >&2; exit 1; }
+        done
+    done
+    echo "test: site/rules.html lists the pinned godolint's $(wc -l < "$tmpdir/module.tsv" | tr -d ' ') rules; the excerpt and both tallies agree" >&2
 
 # The pages must load nothing from elsewhere: no web fonts, no CDN scripts,
 # no hotlinked images. Every load is a request to a third party on each

@@ -10,6 +10,7 @@ hadolint. Two pages, static, no build step, served at https://godolint.forkclose
 | `site/` | The site as served. `forkcloser.css` and `forkcloser.js` are the shared Forkcloser identity (tokens, chrome, light and dark themes, the theme switch); `style.css` is what is particular to godolint. No build step, no web fonts, no third-party requests. |
 | `site/_headers` | Read by Cloudflare Pages: the response headers, a same-origin Content-Security-Policy, HSTS, and friends. |
 | `demo/` | The sample Dockerfile the landing page annotates, and the output the pinned `godolint` produces for it. |
+| `hack/rules/` | A listing of the pinned `godolint`'s rules, run by the `rules` test inside limen's tools module so the pin is the one that holds everywhere. |
 
 ## Working on it
 
@@ -18,6 +19,8 @@ Open `site/index.html` in a browser; the pages are plain files and need no serve
 ```bash
 just lint    # the shared limen baseline: limen, just, links, yaml, shell, dockerfile, commits
 just test    # hero: re-lint the sample and diff against demo/hero-expected.json
+             # rules: list the pinned godolint's rules and diff them against rules.html, the
+             #        landing page's excerpt and both tallies
              # external: fail if any page loads a resource from another host
              # pin: fail if the install commands name a godolint other than .limen/tools/go.mod's
 just regen   # rewrite demo/hero-expected.json after editing the sample
@@ -26,7 +29,9 @@ just regen   # rewrite demo/hero-expected.json after editing the sample
 The findings shown on the landing page are copied from `demo/hero-expected.json`. When
 `just test` fails after a `godolint` bump, run `just regen`, read the diff, and update the
 annotations in `site/index.html` to match; the install commands on the page name the same
-version as `.limen/tools/go.mod` and follow each bump too.
+version as `.limen/tools/go.mod` and follow each bump too, and so do the rules table, the
+landing page's excerpt of it and the two severity tallies, which the `rules` test diffs
+against the rules the pinned module carries.
 
 ## The Forkcloser identity
 
