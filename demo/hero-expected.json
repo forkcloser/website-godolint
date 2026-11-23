@@ -1,14 +1,6 @@
 [
   {
     "file": "demo/hero-dockerfile.txt",
-    "line": 4,
-    "column": 1,
-    "level": "error",
-    "code": "DL3000",
-    "message": "Use absolute WORKDIR"
-  },
-  {
-    "file": "demo/hero-dockerfile.txt",
     "line": 1,
     "column": 1,
     "level": "warning",
@@ -41,11 +33,11 @@
   },
   {
     "file": "demo/hero-dockerfile.txt",
-    "line": 6,
+    "line": 4,
     "column": 1,
-    "level": "warning",
-    "code": "DL3025",
-    "message": "Use arguments JSON notation for CMD and ENTRYPOINT arguments"
+    "level": "error",
+    "code": "DL3000",
+    "message": "Use absolute WORKDIR"
   },
   {
     "file": "demo/hero-dockerfile.txt",
@@ -54,5 +46,13 @@
     "level": "warning",
     "code": "DL4006",
     "message": "Set the SHELL option -o pipefail before RUN with a pipe in it. If you are using /bin/sh in an alpine image or if your shell is symlinked to busybox then consider explicitly setting your SHELL to /bin/ash, or disable this check"
+  },
+  {
+    "file": "demo/hero-dockerfile.txt",
+    "line": 6,
+    "column": 1,
+    "level": "warning",
+    "code": "DL3025",
+    "message": "Use arguments JSON notation for CMD and ENTRYPOINT arguments"
   }
 ]

@@ -52,9 +52,9 @@
     <p class="lede">godolint lints Dockerfiles. It implements hadolint's rules, with the same codes, severities and messages, as a pure Go library with no binary dependencies, plus a small command-line wrapper.</p>
     <div class="install">
       <p class="label">Library</p>
-      <pre><code>go get github.com/forkcloser/godolint@v0.5.1</code></pre>
+      <pre><code>go get github.com/forkcloser/godolint@v0.6.0</code></pre>
       <p class="label">Command line</p>
-      <pre><code>go install github.com/forkcloser/godolint/cmd/godolint@v0.5.1</code></pre>
+      <pre><code>go install github.com/forkcloser/godolint/cmd/godolint@v0.6.0</code></pre>
     </div>
   </div>
 
@@ -98,10 +98,10 @@
     </figure>
     <details class="raw">
       <summary>Output format</summary>
-      <pre><code>[{"file":"Dockerfile","line":4,"column":1,"level":"error","code":"DL3000",
-  "message":"Use absolute WORKDIR"},
- {"file":"Dockerfile","line":1,"column":1,"level":"warning","code":"DL3007",
+      <pre><code>[{"file":"Dockerfile","line":1,"column":1,"level":"warning","code":"DL3007",
   "message":"Using latest is prone to errors if the image will ever update. …"},
+ {"file":"Dockerfile","line":2,"column":1,"level":"warning","code":"DL3008",
+  "message":"Pin versions in apt get install. …"},
  …]</code></pre>
       <p class="label">A JSON array on stdout, one object per finding. The example above is checked against the binary's output by this site's test recipe.</p>
     </details>
@@ -144,7 +144,7 @@ result, err := linter.Lint(ctx, dockerfile)
     </div>
     <div>
       <h3>Command line</h3>
-      <p>The command lints the files given as arguments and prints JSON. It exits with status 1 when there are findings.</p>
+      <p>The command lints the files given as arguments and prints JSON. It exits with status 1 when a finding is graver than style, which is hadolint's default; <code>--failure-threshold</code> moves it.</p>
       <pre><code><span class="c"># Lint one or more files</span>
 godolint Dockerfile
 
@@ -174,7 +174,7 @@ USER root</code></pre>
 <section>
   <div class="wrap">
     <h2>Rules</h2>
-    <p class="intro">Rule metadata and the test corpus are generated from hadolint's source, pinned at its <code>master</code> of 2026-10-14 (<a href="https://github.com/hadolint/hadolint/commit/8ae25c05945f030b1ad520f1802e4143e7d0055d">8ae25c0</a>). godolint passes hadolint's unit tests and reports the same code, severity and message for each rule.</p>
+    <p class="intro">Rule metadata and the test corpus are generated from hadolint's source, pinned at its <code>master</code> of 2026-10-19 (<a href="https://github.com/hadolint/hadolint/commit/1d901b9c0b0d0445d19b1a9128d89fa55bb4604e">1d901b9</a>). godolint passes hadolint's unit tests and reports the same code, severity and message for each rule.</p>
     <ul class="tally" aria-label="Rules by severity">
       <li class="sev-error"><strong>14</strong> error</li>
       <li class="sev-warning"><strong>44</strong> warning</li>
